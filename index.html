@@ -3,10 +3,10 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Bilingual Singing Voice Synthesis
-  <meta name=" keywords" content="BiSinger">
+  <meta name="description" content="A Chinese Mandarin Audio-visual WHISPER SPEECH Dataset with Speech Recognition Baselines">
+  <meta name="keywords" content="AISHELL6-Whisper, Whispered Speech Recognition, Audio-visual Speech Recognition">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AISHELL6-Whisper: A Chinese Mandarin Audio-visual WHISPER SPEECH  Dataset with  Speech Recognition Baselines and Text-To-Speech Baselines/title>
+  <title>AISHELL6-Whisper: A Chinese Mandarin Audio-visual WHISPER SPEECH Dataset</title>
 
   <script>
     var _hmt = _hmt || [];
@@ -17,7 +17,6 @@
       s.parentNode.insertBefore(hm, s);
     })();
   </script>
-
 
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
 
@@ -33,6 +32,41 @@
   <script defer src="./static/js/fontawesome.all.min.js"></script>
   <script src="./static/js/bulma-carousel.min.js"></script>
   <script src="./static/js/bulma-slider.min.js"></script>
+  
+  <style>
+    .hero {
+      background: linear-gradient(135deg, #0062cc 0%, #0099ff 100%);
+      color: white;
+    }
+    .hero.is-light {
+      background: linear-gradient(135deg, #e6f2ff 0%, #f0f7ff 100%);
+    }
+    .table th, .table td {
+      vertical-align: middle;
+    }
+    .youtube-video {
+      width: 100%;
+      height: 200px;
+    }
+    .publication-title {
+      font-size: 2.2rem;
+    }
+    .content h2, .content h3 {
+      margin-top: 1.5em;
+      border-bottom: 1px solid #eee;
+      padding-bottom: 0.3em;
+    }
+    .audio-sample {
+      width: 100%;
+      margin: 10px 0;
+    }
+    .spectrogram-img {
+      width: 100%;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 5px;
+    }
+  </style>
 </head>
 
 <body>
@@ -40,12 +74,12 @@
   <nav id="floating-toc">
     <h2 class="title is-5" style="text-align: center;">Contents</h2>
     <ul id="toc">
-      <!-- <li><a href="#section1">Abstract</a></li>
-      <li><a href="#section6">Download</a></li>
-      <li><a href="#section2">Overview</a></li> -->
-      <li><a href="#section3">The AISHELL6-Whisper dataset <sup>[v1]</sup></a></li>
-      <li><a href="#section4">Baseline modells</a></li>
-      <li><a href="#section5">Experimental Results</a></li>
+      <li><a href="#section1">Abstract</a></li>
+      <li><a href="#section2">Dataset Overview</a></li>
+      <li><a href="#section3">Dataset Statistics</a></li>
+      <li><a href="#section4">Baseline Model & Results</a></li>
+      <li><a href="#section5">Download</a></li>
+      <li><a href="#section6">Demo Samples</a></li>
     </ul>
     <button class="button is-info" id="backToTopBtn" onclick="scrollToTop()"
       style="margin-left: auto; margin-right: auto; display: flex;">
@@ -64,7 +98,12 @@
         <div class="container is-max-desktop">
           <div class="columns is-centered">
             <div class="column has-text-centered">
-              <h1 class="title is-3 publication-title" style="width: 100vw;">AISHELL6-Whisper: A Chinese Mandarin Audio-visual WHISPER SPEECH  Dataset with  Speech Recognition Baselines and Text-To-Speech Baselines/h1>
+              <h1 class="title is-3 publication-title" style="width: 100vw;">AISHELL6-Whisper: A Chinese Mandarin Audio-visual WHISPER SPEECH Dataset</h1>
+              <div class="content has-text-centered">
+                <p class="is-size-5">
+                  A Large-Scale Open-Source Audio-Visual Whisper Speech Dataset with Speech Recognition Baselines
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -73,15 +112,450 @@
 
     <section class="section">
       <div class="container hero-body">
-        <h2 class="title is-4" id="section3">The TMCSPEECH dataset <sup>[v1]</sup></h2>
-        <p>
-          Our AISHELL6-Whisper dataset contains 89 hours each of whisper and parallel normal speech, with synchronized frontal facial videos.
-        </p>
-        <br>
+        <h2 class="title is-4" id="section1">Abstract</h2>
+        <div class="content has-text-justified">
+          <p>
+            Whisper speech recognition is crucial not only for ensuring privacy in sensitive communications but also for providing a critical communication bridge for patients under vocal restraint and enabling discrete interaction in noise-sensitive environments.
+          </p>
+          <p>
+            The development of Chinese Mandarin audio-visual whispered speech recognition is hindered by the lack of large-scale datasets. We present AISHELL6-Whisper, a large-scale open-source audio-visual whisper speech dataset containing 89 hours each of whisper and parallel normal speech, with synchronized frontal facial videos.
+          </p>
+          <p>
+            Moreover, we propose an audio-visual speech recognition (AVSR) baseline based on the Whisper-Flamingo framework, which integrates a parallel training strategy to align embeddings across speech types, and employs a projection layer to adapt to whisper speech's spectral properties. The model achieves a Character Error Rate (CER) of 4.13% for whispered speech and 1.11% for normal speech in the test set of our dataset.
+          </p>
+        </div>
 
+        <h2 class="title is-4" id="section2">Dataset Overview</h2>
+        <div class="content has-text-justified">
+          <p>
+            The AISHELL6-Whisper corpus was collected in a controlled studio environment, containing parallel recordings of whispered and normal speech. It comprises 167 speakers, each reading approximately 20 minutes of poetry texts without any overlap in content.
+          </p>
+          <p>
+            Among them, 121 participants were recorded using both a high-fidelity microphone and a synchronized RGBD camera, while the remaining 46 participants only recorded the audio signals. Audio was captured with a single-channel high-fidelity microphone (Neumann U87) at a 48 kHz sampling rate, with a background noise level of less than 20 dB.
+          </p>
+          <p>
+            The microphone was positioned below the speaker's chin to ensure sound quality without obscuring the speaker's lip movement. Video recordings were captured using a RGBD camera placed one meter directly in front of the speaker, with a resolution of 1280×720 at 25 fps.
+          </p>
+        </div>
 
+        <h2 class="title is-4" id="section3">Dataset Statistics</h2>
+        
+        <h3 class="title is-5">Data Split Statistics</h3>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Set</th>
+              <th>Video</th>
+              <th>Num of Spk</th>
+              <th>Type</th>
+              <th>Time (hrs)</th>
+              <th>Utterances</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td rowspan="4">Train</td>
+              <td rowspan="2">Yes</td>
+              <td rowspan="2">82</td>
+              <td>Normal</td>
+              <td>44.50</td>
+              <td>10012</td>
+            </tr>
+            <tr>
+              <td>Whisper</td>
+              <td>44.51</td>
+              <td>9971</td>
+            </tr>
+            <tr>
+              <td rowspan="2">No</td>
+              <td rowspan="2">28</td>
+              <td>Normal</td>
+              <td>14.67</td>
+              <td>3335</td>
+            </tr>
+            <tr>
+              <td>Whisper</td>
+              <td>15.16</td>
+              <td>3332</td>
+            </tr>
+            <tr>
+              <td rowspan="4">Valid</td>
+              <td rowspan="2">Yes</td>
+              <td rowspan="2">19</td>
+              <td>Normal</td>
+              <td>9.98</td>
+              <td>2331</td>
+            </tr>
+            <tr>
+              <td>Whisper</td>
+              <td>10.19</td>
+              <td>2304</td>
+            </tr>
+            <tr>
+              <td rowspan="2">No</td>
+              <td rowspan="2">10</td>
+              <td>Normal</td>
+              <td>5.19</td>
+              <td>1190</td>
+            </tr>
+            <tr>
+              <td>Whisper</td>
+              <td>5.41</td>
+              <td>1191</td>
+            </tr>
+            <tr>
+              <td rowspan="4">Test</td>
+              <td rowspan="2">Yes</td>
+              <td rowspan="2">20</td>
+              <td>Normal</td>
+              <td>10.24</td>
+              <td>2423</td>
+            </tr>
+            <tr>
+              <td>Whisper</td>
+              <td>10.08</td>
+              <td>2351</td>
+            </tr>
+            <tr>
+              <td rowspan="2">No</td>
+              <td rowspan="2">8</td>
+              <td>Normal</td>
+              <td>4.04</td>
+              <td>940</td>
+            </tr>
+            <tr>
+              <td>Whisper</td>
+              <td>3.91</td>
+              <td>942</td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="title is-5">Comparison with Existing Whisper Speech Datasets</h3>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Dataset</th>
+              <th>Type</th>
+              <th>Language</th>
+              <th>Time(hrs)</th>
+              <th>Parallel</th>
+              <th>Num of Spk</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>UTVE-I</td>
+              <td>ASR</td>
+              <td>English</td>
+              <td>1</td>
+              <td>Yes</td>
+              <td>12</td>
+            </tr>
+            <tr>
+              <td>AVWD</td>
+              <td>AVSR</td>
+              <td>Chinese</td>
+              <td>2.44</td>
+              <td>Yes</td>
+              <td>10</td>
+            </tr>
+            <tr>
+              <td>CHAINs</td>
+              <td>ASR</td>
+              <td>English</td>
+              <td>3</td>
+              <td>Yes</td>
+              <td>36</td>
+            </tr>
+            <tr>
+              <td>AV-Whisper</td>
+              <td>AVSR</td>
+              <td>English</td>
+              <td>10</td>
+              <td>Yes</td>
+              <td>11</td>
+            </tr>
+            <tr>
+              <td>iWhisper-Mandarin</td>
+              <td>ASR</td>
+              <td>Chinese</td>
+              <td>15</td>
+              <td>Yes</td>
+              <td>80</td>
+            </tr>
+            <tr>
+              <td>wTIMIT</td>
+              <td>ASR</td>
+              <td>English</td>
+              <td>26</td>
+              <td>Yes</td>
+              <td>48</td>
+            </tr>
+            <tr class="has-background-info-light">
+              <td><strong>AISHELL6-Whisper</strong></td>
+              <td><strong>AVSR</strong></td>
+              <td><strong>Chinese</strong></td>
+              <td><strong>89</strong></td>
+              <td><strong>Yes</strong></td>
+              <td><strong>167</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <div class="columns is-centered">
+          <div class="column">
+            <div class="content">
+              <h4 class="title is-6">Spectrogram Comparison</h4>
+              <figure>
+                <img src="img/spectrogram_comparison.png" alt="Spectrogram comparison between normal and whisper speech" class="spectrogram-img">
+                <figcaption class="has-text-centered">Comparison of spectrograms for normal speech (left) and whisper speech (right)</figcaption>
+              </figure>
+            </div>
+          </div>
+        </div>
+
+        <h2 class="title is-4" id="section4">Baseline Model & Experimental Results</h2>
+        
+        <div class="content has-text-justified">
+          <p>
+            We implemented Whisper-Flamingo as the baseline of our audio-visual whisper speech recognition systems. This model incorporates visual features from AV-HuBERT into the OpenAI Whisper speech recognition and translation framework through gated cross-attention.
+          </p>
+          <p>
+            We employ a parallel training strategy to align whisper speech embeddings with normal speech embeddings together and apply an additional projection layer on top of the whisper speech features to further improve the recognition accuracy of whisper speech.
+          </p>
+        </div>
+
+        <h3 class="title is-5">Model Architecture</h3>
+        <div class="content has-text-centered">
+          <img src="img/model_architecture.png" alt="Model architecture diagram" style="width: 100%; max-width: 800px;">
+        </div>
+
+        <h3 class="title is-5">Recognition Performance on AISHELL6-Whisper</h3>
+        <table class="table is-bordered is-striped is-narrow is-hoverable is-fullwidth">
+          <thead>
+            <tr>
+              <th>Model</th>
+              <th>Parallel training</th>
+              <th>Projection layer</th>
+              <th>Video</th>
+              <th>Whisper Speech CER</th>
+              <th>Normal Speech CER</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Whisper (Large-V3)</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>18.93%</td>
+              <td>3.95%</td>
+            </tr>
+            <tr>
+              <td>+Finetune</td>
+              <td>-</td>
+              <td>-</td>
+              <td>-</td>
+              <td>6.69%</td>
+              <td>1.62%</td>
+            </tr>
+            <tr>
+              <td>+Parallel training</td>
+              <td>Yes</td>
+              <td>-</td>
+              <td>-</td>
+              <td>4.53%</td>
+              <td>0.98%</td>
+            </tr>
+            <tr>
+              <td>+Projection layer</td>
+              <td>Yes</td>
+              <td>Yes</td>
+              <td>-</td>
+              <td>4.34%</td>
+              <td>1.14%</td>
+            </tr>
+            <tr>
+              <td>+Video</td>
+              <td>Yes</td>
+              <td>-</td>
+              <td>Yes</td>
+              <td>4.21%</td>
+              <td>1.08%</td>
+            </tr>
+            <tr class="has-background-success-light">
+              <td><strong>+Video (Proposed)</strong></td>
+              <td><strong>Yes</strong></td>
+              <td><strong>Yes</strong></td>
+              <td><strong>Yes</strong></td>
+              <td><strong>4.13%</strong></td>
+              <td><strong>1.11%</strong></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h2 class="title is-4" id="section5">Download</h2>
+
+        <div class="notification is-warning">
+          <strong>Note:</strong> Our released dataset contains audio-visual data with synchronized transcripts. The dataset is available for research purposes only.
+        </div>
+
+        <div class="content has-text-justified">
+          <p>
+            To obtain the AISHELL6-Whisper dataset, please contact <b>dataset@aishelltech.com</b> via your institutional e-mail along with your affiliation and intended use of the data. Please allow up to 5 business days for processing your request.
+          </p>
+          <p>
+            The dataset includes:
+          </p>
+          <ul>
+            <li>Audio recordings (48kHz, WAV format)</li>
+            <li>Video recordings (1280×720, 25fps, MP4 format)</li>
+            <li>Text transcripts with timestamps</li>
+            <li>Speaker metadata</li>
+            <li>Preprocessed lip movement videos</li>
+          </ul>
+        </div>
+
+        <h2 class="title is-4" id="section6">License</h2>
+        <div class="content has-text-justified">
+          <p>
+            The AISHELL6-Whisper dataset is licensed under the <strong>CC BY-NC-SA 4.0</strong> license. This means that you can share and adapt the dataset for non-commercial purposes as long as you provide appropriate attribution and distribute your contributions under the same license. Detailed terms can be found on <a href="./LICENSE">LICENSE</a>.
+          </p>
+        </div>
+
+        <h2 class="title is-4">Demo Samples</h2>
+        
+        <h3 class="title is-5">Parallel Normal and Whisper Speech Samples</h3>
+        
+        <table class="table is-fullwidth">
+          <thead>
+            <tr>
+              <th>Speaker ID</th>
+              <th>Text</th>
+              <th>Normal Speech</th>
+              <th>Whisper Speech</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>S0120</td>
+              <td>今天天气真好，适合出去散步</td>
+              <td>
+                <audio controls class="audio-sample">
+                  <source src="samples/S0120_normal.wav" type="audio/wav">
+                  Your browser does not support the audio element.
+                </audio>
+              </td>
+              <td>
+                <audio controls class="audio-sample">
+                  <source src="samples/S0120_whisper.wav" type="audio/wav">
+                  Your browser does not support the audio element.
+                </audio>
+              </td>
+            </tr>
+            <tr>
+              <td>S0187</td>
+              <td>科学研究需要耐心和毅力</td>
+              <td>
+                <audio controls class="audio-sample">
+                  <source src="samples/S0187_normal.wav" type="audio/wav">
+                  Your browser does not support the audio element.
+                </audio>
+              </td>
+              <td>
+                <audio controls class="audio-sample">
+                  <source src="samples/S0187_whisper.wav" type="audio/wav">
+                  Your browser does not support the audio element.
+                </audio>
+              </td>
+            </tr>
+            <tr>
+              <td>S0256</td>
+              <td>人工智能技术正在改变世界</td>
+              <td>
+                <audio controls class="audio-sample">
+                  <source src="samples/S0256_normal.wav" type="audio/wav">
+                  Your browser does not support the audio element.
+                </audio>
+              </td>
+              <td>
+                <audio controls class="audio-sample">
+                  <source src="samples/S0256_whisper.wav" type="audio/wav">
+                  Your browser does not support the audio element.
+                </audio>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <h3 class="title is-5">Audio-Visual Samples</h3>
+        
+        <div class="columns">
+          <div class="column">
+            <div class="card">
+              <div class="card-content">
+                <p class="title is-6">Normal Speech with Video</p>
+                <video controls style="width: 100%;">
+                  <source src="samples/S0120_normal_video.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <p class="has-text-centered">Speaker: S0120</p>
+              </div>
+            </div>
+          </div>
+          <div class="column">
+            <div class="card">
+              <div class="card-content">
+                <p class="title is-6">Whisper Speech with Video</p>
+                <video controls style="width: 100%;">
+                  <source src="samples/S0120_whisper_video.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+                <p class="has-text-centered">Speaker: S0120</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="columns is-centered">
+        <div class="column is-8">
+          <div class="content has-text-centered">
+            <p>
+              This website is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+            </p>
+            <p class="is-size-7">
+              Template adapted from: <a href="https://github.com/nerfies/nerfies.github.io">Nerfies</a>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </footer>
 
   <script src="./static/js/index.js"></script>
+  <script>
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Floating TOC functionality
+    window.addEventListener('scroll', function() {
+      const toc = document.getElementById('floating-toc');
+      if (window.scrollY > 300) {
+        toc.classList.add('is-active');
+      } else {
+        toc.classList.remove('is-active');
+      }
+    });
+  </script>
 
 </body>
 

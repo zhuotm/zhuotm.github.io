@@ -1,0 +1,235 @@
+body {
+  font-family: 'Noto Sans', sans-serif;
+}
+
+
+.footer .icon-link {
+  font-size: 25px;
+  color: #000;
+}
+
+.link-block a {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.dnerf {
+  font-variant: small-caps;
+}
+
+
+.teaser .hero-body {
+  padding-top: 0;
+  padding-bottom: 3rem;
+}
+
+.teaser {
+  font-family: 'Google Sans', sans-serif;
+}
+
+
+.publication-title {}
+
+.publication-banner {
+  max-height: parent;
+
+}
+
+.publication-banner video {
+  position: relative;
+  left: auto;
+  top: auto;
+  transform: none;
+  object-fit: fit;
+}
+
+.publication-header .hero-body {}
+
+.publication-title {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-authors {
+  font-family: 'Google Sans', sans-serif;
+}
+
+.publication-venue {
+  color: #555;
+  width: fit-content;
+  font-weight: bold;
+}
+
+.publication-awards {
+  color: #ff3860;
+  width: fit-content;
+  font-weight: bolder;
+}
+
+.publication-authors {}
+
+.publication-authors a {
+  color: hsl(204, 86%, 53%) !important;
+}
+
+.publication-authors a:hover {
+  text-decoration: underline;
+}
+
+.author-block {
+  display: inline-block;
+}
+
+.publication-banner img {}
+
+.publication-authors {
+  /*color: #4286f4;*/
+}
+
+.publication-video {
+  position: relative;
+  width: 100%;
+  height: 0;
+  padding-bottom: 56.25%;
+
+  overflow: hidden;
+  border-radius: 10px !important;
+}
+
+.publication-video iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.publication-body img {}
+
+.results-carousel {
+  overflow: hidden;
+}
+
+.results-carousel .item {
+  margin: 5px;
+  overflow: hidden;
+  border: 1px solid #bbb;
+  border-radius: 10px;
+  padding: 0;
+  font-size: 0;
+}
+
+.results-carousel video {
+  margin: 0;
+}
+
+
+.interpolation-panel {
+  background: #f5f5f5;
+  border-radius: 10px;
+}
+
+.interpolation-panel .interpolation-image {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.interpolation-video-column {}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+.interpolation-panel .slider {
+  margin: 0 !important;
+}
+
+#interpolation-image-wrapper {
+  width: 100%;
+}
+
+#interpolation-image-wrapper img {
+  border-radius: 5px;
+}
+
+.table th:not([align]) {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.button.is-info.is-small {
+  transition: background-color 0.3s, box-shadow 0.3s;
+}
+
+.button.is-info.is-small:hover {
+  background-color: darken(rgba(0, 0, 0, 0.5), 20%);
+  /* Replace $info with your color variable or hex code */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.button.is-info.is-small:active {
+  background-color: darken(rgba(0, 0, 0, 0.5), 20%);
+  /* Replace $info with your color variable or hex code */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.youtube-video {
+  border-radius: 10px;
+  width: 420px;
+  height: 345px;
+  margin-top: 5px;
+  position: relative;
+}
+
+#floating-toc {
+  position: fixed;
+  /* 固定定位 */
+  top: 45%;
+  /* bottom: 10px; */
+  /* 距离页面顶部的距离 */
+  right: 10px;
+  /* 距离页面右侧的距离 */
+  width: 220px;
+  /* 索引层宽度 */
+  background-color: #f9f9f9;
+  /* 背景色 */
+  border: 1px solid #ccc;
+  /* 边框 */
+  padding: 10px;
+  /* 内边距 */
+  z-index: 100;
+  /* 堆叠顺序，确保在内容之上 */
+}
+
+#floating-toc h2 {
+  margin-top: 0;
+  font-size: 16px;
+}
+
+#floating-toc ul {  
+  list-style: none; /* 移除默认的列表样式 */  
+  padding: 0;  
+}  
+  
+#floating-toc ul li {  
+  position: relative; /* 为伪元素定位做准备 */  
+  margin-bottom: 5px;  
+}  
+  
+#floating-toc ul li:before {  
+  content: "•"; /* 设置符号内容，这里是一个小圆点 */  
+  position: absolute;  
+  left: 0px; /* 调整符号的位置 */  
+}  
+  
+#floating-toc ul li a {  
+  display: block;  
+  padding-left: 10px; /* 为链接添加左边距，留出符号的空间 */  
+  color: black;  
+  text-decoration: none;  
+  font-size: 14px;  
+}  
+
+#floating-toc li a.active {
+  font-weight: bold;
+  color: #4caf50;
+}
